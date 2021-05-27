@@ -9,6 +9,22 @@
 #define sorted 2
 
 
+int total, red, blu, grn, ylw = 0;
+
+
+void display(){
+	nxtDisplayString(0, "TOTAL BALLS SORTED: %d", total); 	
+	nxtDisplayString(1,"RED: %d", red); 
+	nxtDisplayString(2,"BLUE: %d", blu); 
+	nxtDisplayString(3, "YELLOW: %d", ylw); 
+	nxtDisplayString(4, "GREEN: %d", grn); 
+}
+
+void counter(){
+	total++;
+	display();
+}
+
 task main()
 {
 start:
@@ -21,11 +37,15 @@ start:
 sortIt:
 	switch(SensorValue[color]){
 	case YELLOWCOLOR:
+		ylw++;
+		counter();
 		setMotorTarget(clock, 90, 20);
 		waitUntilMotorStop(clock);
 		delay(1000);
 		break;
 	case REDCOLOR:
+		red++;
+		counter();
 		setMotorTarget(sorter, 90, 50);
 		waitUntilMotorStop(sorter);
 		delay(100);
@@ -36,6 +56,8 @@ sortIt:
 		waitUntilMotorStop(sorter);
 		break;
 	case BLUECOLOR:
+		blu++;
+		counter();
 		setMotorTarget(sorter, 180, 50);
 		waitUntilMotorStop(sorter);
 		delay(100);
@@ -46,6 +68,8 @@ sortIt:
 		waitUntilMotorStop(sorter);
 		break;
 	case GREENCOLOR:
+		grn++;
+		counter();
 		setMotorTarget(sorter, -90, -50);
 		waitUntilMotorStop(sorter);
 		delay(100);
